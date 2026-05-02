@@ -5,8 +5,7 @@ import (
 	"os"
 )
 
-func write(cfg Config) error {
-
+func write(cfg *Config) error {
 	byteArray, err := json.MarshalIndent(cfg, "", "  ")
 	if err != nil {
 		return err
