@@ -11,7 +11,7 @@ import (
 
 func HandlerAddFeed(s *State, cmd Command) error {
 	if len(cmd.Args) < 2 {
-		return fmt.Errorf("Not enought arguments for addfeed")
+		return fmt.Errorf("Not enough arguments for addfeed")
 	}
 
 	user, err := s.Db.GetUser(context.Background(), s.Cfg.CurrentUserName)

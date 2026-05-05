@@ -8,7 +8,7 @@ import (
 
 func HandlerLogin(s *State, cmd Command) error {
 	if len(cmd.Args) == 0 {
-		return fmt.Errorf("not enought arguments")
+		return fmt.Errorf("not enough arguments")
 	}
 
 	if _, err := s.Db.GetUser(context.Background(), cmd.Args[0]); err != nil {

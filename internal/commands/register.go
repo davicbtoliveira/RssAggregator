@@ -12,7 +12,7 @@ import (
 
 func HandlerRegister(s *State, cmd Command) error {
 	if len(cmd.Args) == 0 {
-		return fmt.Errorf("not enoght arguments")
+		return fmt.Errorf("not enogh arguments")
 	}
 
 	if _, err := s.Db.GetUser(context.Background(), cmd.Args[0]); err == nil {
