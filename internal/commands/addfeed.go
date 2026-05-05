@@ -31,5 +31,13 @@ func HandlerAddFeed(s *State, cmd Command) error {
 		return err
 	}
 
+	followCmd := Command{
+		Name: "follow",
+		Args: cmd.Args[1:],
+	}
+	if err = HandlerFollow(s, followCmd); err != nil {
+		return err
+	}
+
 	return nil
 }
