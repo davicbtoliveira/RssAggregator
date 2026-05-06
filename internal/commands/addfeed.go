@@ -9,17 +9,12 @@ import (
 	"github.com/google/uuid"
 )
 
-func HandlerAddFeed(s *State, cmd Command) error {
+func HandlerAddFeed(s *State, cmd Command, user database.User) error {
 	if len(cmd.Args) < 2 {
 		return fmt.Errorf("Not enough arguments for addfeed")
 	}
 
-	user, err := s.Db.GetUser(context.Background(), s.Cfg.CurrentUserName)
-	if err != nil {
-		return err
-	}
-
-	_, err = s.Db.CreateFeed(context.Background(), database.CreateFeedParams{
+	_, err := s.Db.CreateFeed(context.Background(), database.CreateFeedParams{
 		ID:        uuid.New(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -35,7 +30,7 @@ func HandlerAddFeed(s *State, cmd Command) error {
 		Name: "follow",
 		Args: cmd.Args[1:],
 	}
-	if err = HandlerFollow(s, followCmd); err != nil {
+	if err = HandlerFollow(s, followCmd, user); err != nil {
 		return err
 	}
 

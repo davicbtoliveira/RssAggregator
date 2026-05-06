@@ -8,6 +8,7 @@ import (
 	"github.com/davicbtoliveira/rss_aggregator/internal/commands"
 	"github.com/davicbtoliveira/rss_aggregator/internal/config"
 	"github.com/davicbtoliveira/rss_aggregator/internal/database"
+	"github.com/davicbtoliveira/rss_aggregator/internal/middleware"
 	_ "github.com/lib/pq"
 )
 
@@ -36,9 +37,9 @@ func main() {
 	cmds.Register("reset", commands.HandlerReset)
 	cmds.Register("users", commands.HandlerListUsers)
 	cmds.Register("agg", commands.HandlerAgg)
-	cmds.Register("addfeed", commands.HandlerAddFeed)
+	cmds.Register("addfeed", middleware.MiddlewareLoggedIn(commands.HandlerAddFeed))
 	cmds.Register("feeds", commands.HandlerFeeds)
-	cmds.Register("follow", commands.HandlerFollow)
+	cmds.Register("follow", middleware.MiddlewareLoggedIn(commands.HandlerFollow))
 	cmds.Register("following", commands.HandlerFollowing)
 
 	arguments := os.Args
