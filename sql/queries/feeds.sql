@@ -18,3 +18,8 @@ FROM feeds;
 SELECT *
 FROM feeds
 WHERE url = $1;
+
+-- name: MarkFeedFetched :exec
+UPDATE feeds
+SET last_fetched_at = updated_at
+WHERE id = $1
